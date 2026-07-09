@@ -70,7 +70,7 @@ h1 { font-size: 21px; line-height: 1.08; }
 .theme-toggle { min-height: 34px; border-radius: 999px; padding: 7px 12px; }
 .pill { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; border: 1px solid var(--line); border-radius: 999px; background: var(--control); color: var(--muted); padding: 7px 10px; font-size: 13px; white-space: nowrap; }
 .pill strong { color: var(--ink); }
-.shell { width: min(1120px, 100%); margin: 0 auto; padding: 18px; display: grid; gap: 14px; align-content: start; }
+.shell { width: min(1240px, 100%); margin: 0 auto; padding: 18px; display: grid; gap: 14px; align-content: start; }
 .call-panel { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: var(--shadow); }
 .call-panel.live { border-color: var(--teal); background: var(--live-bg); box-shadow: 0 0 0 4px rgba(11,107,107,.1), var(--shadow); }
 .timer-wrap { display: flex; align-items: center; gap: 12px; min-width: 0; }
@@ -78,7 +78,19 @@ h1 { font-size: 21px; line-height: 1.08; }
 .call-copy { display: grid; gap: 3px; min-width: 0; }
 .call-copy strong { font-size: 17px; }
 .call-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-.card { min-height: 455px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 16px; padding: 30px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--shadow); }
+.study-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 14px; align-items: start; }
+.primary-column { display: grid; gap: 10px; min-width: 0; }
+.side-panel { display: grid; gap: 10px; position: sticky; top: 86px; }
+.mini-panel { border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: 0 12px 34px rgba(16,24,40,.07); padding: 14px; display: grid; gap: 10px; }
+.mini-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.eyebrow { color: var(--teal); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.metric { border: 1px solid var(--line); border-radius: 10px; background: var(--control); padding: 10px; }
+.metric strong { display: block; font-size: 23px; line-height: 1; color: var(--ink); }
+.focus-title { font-size: 17px; font-weight: 900; line-height: 1.25; }
+.shortcut-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.kbd { border: 1px solid var(--line); border-radius: 6px; background: var(--control); color: var(--muted); padding: 5px 7px; font-size: 12px; }
+.card { min-height: 485px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 16px; padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--shadow); }
 .card.revealed { border-color: var(--line-strong); }
 .progress-track { height: 8px; overflow: hidden; border-radius: 999px; background: #edf1f6; }
 .progress-track span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--blue)); transition: width .18s ease; }
@@ -116,11 +128,14 @@ textarea { min-height: 96px; resize: vertical; font: 12px/1.4 Consolas, monospac
 .more-actions .btn { flex: 1 1 160px; }
 .feedback { min-height: 20px; color: var(--muted); }
 .missed-list { display: grid; gap: 8px; max-height: 190px; overflow: auto; }
+.side-panel .missed-list { max-height: 270px; }
 .missed-item { border: 1px solid var(--line); border-radius: 8px; background: var(--control); color: var(--ink); padding: 10px; text-align: left; font-size: 13px; line-height: 1.35; }
 @media (max-width: 820px) {
   .topbar { position: static; align-items: flex-start; flex-direction: column; }
   .scorebar { justify-content: flex-start; }
   .shell { padding: 12px; }
+  .study-layout { grid-template-columns: 1fr; }
+  .side-panel { position: static; grid-template-columns: 1fr; }
   .call-panel { grid-template-columns: 1fr; align-items: stretch; }
   .call-actions { justify-content: stretch; }
   .call-actions .btn, .call-actions .pill { flex: 1 1 auto; justify-content: center; }
@@ -154,19 +169,47 @@ textarea { min-height: 96px; resize: vertical; font: 12px/1.4 Consolas, monospac
       <div class="timer-wrap"><div class="timer" id="callTime">12</div><div class="call-copy"><strong id="callTitle">Call mode</strong><p class="small muted" id="callPhase">Answer timer</p></div></div>
       <div class="call-actions"><span class="pill">Round <strong id="callSeen">0</strong></span><span class="pill">Right <strong id="callRight">0</strong></span><span class="pill">Missed <strong id="callWrong">0</strong></span><button class="btn primary" id="callToggle">Start Call</button></div>
     </section>
-    <section class="card" id="card">
-      <div class="progress-track"><span id="progressBar"></span></div>
-      <div class="meta"><span class="tag kind" id="kind">card</span><span class="tag" id="category">Category</span><span class="tag" id="source">Source</span></div>
-      <p class="prompt" id="prompt">Answer out loud</p>
-      <div class="front" id="front"></div>
-      <div class="options" id="options"></div>
-      <div class="back" id="back"></div>
-    </section>
-    <section class="actions">
-      <button class="btn primary" id="reveal">Show</button>
-      <button class="btn good" id="knew">Right</button>
-      <button class="btn bad" id="miss">Missed</button>
-      <button class="btn blue" id="next">Next</button>
+    <section class="study-layout">
+      <div class="primary-column">
+        <section class="card" id="card">
+          <div class="progress-track"><span id="progressBar"></span></div>
+          <div class="meta"><span class="tag kind" id="kind">card</span><span class="tag" id="category">Category</span><span class="tag" id="source">Source</span></div>
+          <p class="prompt" id="prompt">Answer out loud</p>
+          <div class="front" id="front"></div>
+          <div class="options" id="options"></div>
+          <div class="back" id="back"></div>
+        </section>
+        <section class="actions">
+          <button class="btn primary" id="reveal">Show</button>
+          <button class="btn good" id="knew">Right</button>
+          <button class="btn bad" id="miss">Missed</button>
+          <button class="btn blue" id="next">Next</button>
+        </section>
+      </div>
+      <aside class="side-panel">
+        <section class="mini-panel">
+          <div class="mini-title"><p class="eyebrow">Session</p><span class="pill">Live</span></div>
+          <div class="metric-grid">
+            <div class="metric"><strong id="sideSeen">0</strong><span class="small muted">seen</span></div>
+            <div class="metric"><strong id="sideRate">0%</strong><span class="small muted">right rate</span></div>
+            <div class="metric"><strong id="sideLeft">0</strong><span class="small muted">left</span></div>
+            <div class="metric"><strong id="sideMissed">0</strong><span class="small muted">missed</span></div>
+          </div>
+        </section>
+        <section class="mini-panel">
+          <p class="eyebrow">Current Focus</p>
+          <div class="focus-title" id="focusTitle">Mixed review</div>
+          <p class="small muted" id="focusHint">Answer first, then check the rule.</p>
+        </section>
+        <section class="mini-panel">
+          <div class="mini-title"><p class="eyebrow">Missed Stack</p><span class="pill"><strong id="sideMissedCount">0</strong></span></div>
+          <div class="missed-list" id="sideMissedList"></div>
+        </section>
+        <section class="mini-panel">
+          <p class="eyebrow">Shortcuts</p>
+          <div class="shortcut-row"><span class="kbd">Space</span><span class="kbd">Next</span><span class="kbd">K</span><span class="kbd">M</span><span class="kbd">C</span><span class="kbd">D</span></div>
+        </section>
+      </aside>
     </section>
     <details class="more">
       <summary>More</summary>
@@ -191,12 +234,12 @@ const allCards = JSON.parse(document.getElementById('deck-data').textContent);
 const $ = id => document.getElementById(id);
 function readJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch { return fallback; } }
 const state = { mode:'all', index:0, order:allCards.map((_,i)=>i), revealed:false, selected:'', scoredCardId:'', stats:readJson('safeMloStats', {seen:0,known:0,missed:0}), missedIds:readJson('safeMloMissed', []), call:{active:false, phase:'answer', remaining:12, round:0, right:0, wrong:0, timer:null} };
-const el = { card:$('card'), front:$('front'), back:$('back'), opts:$('options'), kind:$('kind'), catTag:$('category'), srcTag:$('source'), prompt:$('prompt'), pos:$('position'), total:$('total'), known:$('known'), missed:$('missed'), themeToggle:$('themeToggle'), progress:$('progressBar'), mode:$('mode'), cat:$('cat'), src:$('src'), search:$('search'), list:$('missedList'), saveData:$('saveData'), saveStatus:$('saveStatus'), callPanel:$('callPanel'), callToggle:$('callToggle'), callTitle:$('callTitle'), callTime:$('callTime'), callPhase:$('callPhase'), answerSeconds:$('answerSeconds'), reviewSeconds:$('reviewSeconds'), callSeen:$('callSeen'), callRight:$('callRight'), callWrong:$('callWrong') };
+const el = { card:$('card'), front:$('front'), back:$('back'), opts:$('options'), kind:$('kind'), catTag:$('category'), srcTag:$('source'), prompt:$('prompt'), pos:$('position'), total:$('total'), known:$('known'), missed:$('missed'), sideSeen:$('sideSeen'), sideRate:$('sideRate'), sideLeft:$('sideLeft'), sideMissed:$('sideMissed'), sideMissedCount:$('sideMissedCount'), focusTitle:$('focusTitle'), focusHint:$('focusHint'), themeToggle:$('themeToggle'), progress:$('progressBar'), mode:$('mode'), cat:$('cat'), src:$('src'), search:$('search'), list:$('missedList'), sideList:$('sideMissedList'), saveData:$('saveData'), saveStatus:$('saveStatus'), callPanel:$('callPanel'), callToggle:$('callToggle'), callTitle:$('callTitle'), callTime:$('callTime'), callPhase:$('callPhase'), answerSeconds:$('answerSeconds'), reviewSeconds:$('reviewSeconds'), callSeen:$('callSeen'), callRight:$('callRight'), callWrong:$('callWrong') };
 function syncThemeButton() { el.themeToggle.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark'; }
 function toggleTheme() { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('safeMloTheme', isDark ? 'dark' : 'light'); syncThemeButton(); }
 function current() { if(!state.order.length) return null; state.index=Math.max(0,Math.min(state.index,state.order.length-1)); return allCards[state.order[state.index]]; }
 function filtered() { const mode=state.mode, cat=el.cat.value, src=el.src.value, q=el.search.value.trim().toLowerCase(); return allCards.map((c,i)=>[c,i]).filter(([c])=>{ if(mode==='missed'&&!state.missedIds.includes(c.id)) return false; if(!['all','missed'].includes(mode)&&c.kind!==mode) return false; if(cat&&c.category!==cat) return false; if(src&&c.source!==src) return false; if(q&&!([c.front,c.back,c.category,c.source,c.tags.join(' ')].join(' ').toLowerCase().includes(q))) return false; return true; }).map(([,i])=>i); }
-function makeSaveCode() { const c=current(); const payload={v:3, stats:state.stats, missedIds:state.missedIds, index:state.index, mode:state.mode, cardId:c?c.id:'', updatedAt:new Date().toISOString()}; return btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }
+function makeSaveCode() { const c=current(); const payload={v:4, stats:state.stats, missedIds:state.missedIds, index:state.index, mode:state.mode, cardId:c?c.id:'', updatedAt:new Date().toISOString()}; return btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }
 function syncSaveBox() { el.saveData.value=makeSaveCode(); }
 function save() { localStorage.setItem('safeMloStats', JSON.stringify(state.stats)); localStorage.setItem('safeMloMissed', JSON.stringify(state.missedIds)); syncSaveBox(); }
 function apply(reset=true) { state.order=filtered(); if(reset) state.index=0; state.revealed=false; state.selected=''; state.scoredCardId=''; render(); }
@@ -218,8 +261,10 @@ function reset() { state.stats={seen:0,known:0,missed:0}; state.missedIds=[]; st
 function copySaveCode() { syncSaveBox(); el.saveData.select(); navigator.clipboard?.writeText(el.saveData.value).then(()=>el.saveStatus.textContent='Continue code copied.').catch(()=>{ document.execCommand('copy'); el.saveStatus.textContent='Code selected. Copy it if needed.'; }); }
 function restoreSaveCode() { try { const p=JSON.parse(decodeURIComponent(escape(atob(el.saveData.value.trim())))); state.stats=p.stats||state.stats; state.missedIds=p.missedIds||[]; state.mode=p.mode||'all'; el.mode.value=state.mode; apply(true); const idx=p.cardId?state.order.findIndex(i=>allCards[i].id===p.cardId):-1; if(idx>=0) state.index=idx; save(); el.saveStatus.textContent='Progress restored.'; render(); } catch { el.saveStatus.textContent='That code did not restore.'; } }
 function renderOptions(c) { el.opts.innerHTML=''; if(!c||c.kind!=='quiz') return; c.options.forEach((opt,i)=>{ const letter=String.fromCharCode(65+i); const b=document.createElement('button'); b.className='option'; if(state.revealed) { if(letter===c.answer) b.classList.add('correct'); if(letter===state.selected&&letter!==c.answer) b.classList.add('wrong'); } b.textContent=`${letter}. ${opt}`; b.onclick=()=>choose(letter); el.opts.appendChild(b); }); }
-function renderMissed() { el.list.innerHTML=''; const missed=state.missedIds.map(id=>allCards.find(c=>c.id===id)).filter(Boolean).slice(0,18); if(!missed.length) { el.list.innerHTML='<p class="small muted">No missed cards yet.</p>'; return; } missed.forEach(c=>{ const b=document.createElement('button'); b.className='missed-item'; b.textContent=c.front; b.onclick=()=>{ state.mode='missed'; el.mode.value='missed'; apply(true); const idx=state.order.findIndex(i=>allCards[i].id===c.id); if(idx>=0) state.index=idx; render(); }; el.list.appendChild(b); }); }
-function render() { syncThemeButton(); const c=current(); el.callPanel.classList.toggle('live',state.call.active); el.callToggle.textContent=state.call.active?'Pause Call':'Start Call'; el.callTitle.textContent=state.call.active?'Call running':'Call mode'; el.callTime.textContent=state.call.remaining; el.callPhase.textContent=state.call.phase==='answer'?'Answer timer':'Review timer'; el.callSeen.textContent=state.call.round; el.callRight.textContent=state.call.right; el.callWrong.textContent=state.call.wrong; el.known.textContent=state.stats.known; el.missed.textContent=state.stats.missed; el.total.textContent=state.order.length; el.pos.textContent=state.order.length?state.index+1:0; el.progress.style.width=state.order.length?`${((state.index+1)/state.order.length)*100}%`:'0%'; el.card.classList.toggle('revealed',state.revealed); if(!c) { el.kind.textContent='empty'; el.catTag.textContent='No match'; el.srcTag.textContent='Change filters'; el.prompt.textContent='No card'; el.front.textContent='No cards match these options.'; el.back.textContent=''; el.opts.innerHTML=''; renderMissed(); syncSaveBox(); return; } el.kind.textContent=c.kind; el.catTag.textContent=c.category; el.srcTag.textContent=c.source; el.prompt.textContent=c.kind==='quiz'?'Choose the answer':'Answer out loud'; el.front.textContent=c.front; el.back.textContent=c.back; renderOptions(c); renderMissed(); syncSaveBox(); }
+function buildMissedButton(c) { const b=document.createElement('button'); b.className='missed-item'; b.textContent=c.front; b.onclick=()=>{ state.mode='missed'; el.mode.value='missed'; apply(true); const idx=state.order.findIndex(i=>allCards[i].id===c.id); if(idx>=0) state.index=idx; render(); }; return b; }
+function renderMissed() { const missed=state.missedIds.map(id=>allCards.find(c=>c.id===id)).filter(Boolean).slice(0,18); [el.list, el.sideList].forEach(target=>{ target.innerHTML=''; if(!missed.length) { target.innerHTML='<p class="small muted">No missed cards yet.</p>'; return; } missed.forEach(c=>target.appendChild(buildMissedButton(c))); }); }
+function focusHint(c) { if(!c) return 'Adjust filters to get cards back.'; if(state.call.active) return 'Let the timer run, then score before review ends.'; if(c.kind==='quiz') return 'Pick an answer, then say why it is right.'; if(c.kind==='trap') return 'Explain why the tempting answer is wrong.'; if((c.tags||[]).includes('math')) return 'Say the formula before solving.'; return 'Answer first, then check the rule.'; }
+function render() { syncThemeButton(); const c=current(); const seen=state.stats.seen||0; const right=state.stats.known||0; const rate=seen?Math.round((right/seen)*100):0; el.callPanel.classList.toggle('live',state.call.active); el.callToggle.textContent=state.call.active?'Pause Call':'Start Call'; el.callTitle.textContent=state.call.active?'Call running':'Call mode'; el.callTime.textContent=state.call.remaining; el.callPhase.textContent=state.call.phase==='answer'?'Answer timer':'Review timer'; el.callSeen.textContent=state.call.round; el.callRight.textContent=state.call.right; el.callWrong.textContent=state.call.wrong; el.known.textContent=state.stats.known; el.missed.textContent=state.stats.missed; el.sideSeen.textContent=seen; el.sideRate.textContent=`${rate}%`; el.sideLeft.textContent=Math.max(0,state.order.length-state.index-1); el.sideMissed.textContent=state.stats.missed; el.sideMissedCount.textContent=state.missedIds.length; el.total.textContent=state.order.length; el.pos.textContent=state.order.length?state.index+1:0; el.progress.style.width=state.order.length?`${((state.index+1)/state.order.length)*100}%`:'0%'; el.card.classList.toggle('revealed',state.revealed); if(!c) { el.kind.textContent='empty'; el.catTag.textContent='No match'; el.srcTag.textContent='Change filters'; el.prompt.textContent='No card'; el.front.textContent='No cards match these options.'; el.back.textContent=''; el.opts.innerHTML=''; el.focusTitle.textContent='No cards'; el.focusHint.textContent=focusHint(c); renderMissed(); syncSaveBox(); return; } el.kind.textContent=c.kind; el.catTag.textContent=c.category; el.srcTag.textContent=c.source; el.prompt.textContent=c.kind==='quiz'?'Choose the answer':'Answer out loud'; el.front.textContent=c.front; el.back.textContent=c.back; el.focusTitle.textContent=c.category; el.focusHint.textContent=focusHint(c); renderOptions(c); renderMissed(); syncSaveBox(); }
 el.mode.oninput=()=>{ state.mode=el.mode.value; apply(true); }; [el.cat,el.src,el.search].forEach(x=>x.oninput=()=>apply(true)); $('reveal').onclick=reveal; $('knew').onclick=()=>mark('known'); $('miss').onclick=()=>mark('missed'); $('next').onclick=next; $('shuffle').onclick=shuffle; $('reset').onclick=reset; $('copySave').onclick=copySaveCode; $('restoreSave').onclick=restoreSaveCode; el.callToggle.onclick=toggleCall; el.themeToggle.onclick=toggleTheme; el.card.onclick=e=>{ if(!e.target.closest('.option')) reveal(); }; document.onkeydown=e=>{ if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return; if(e.key===' ') { e.preventDefault(); state.revealed?next():reveal(); } if(e.key==='ArrowRight') next(); if(e.key.toLowerCase()==='k') mark('known'); if(e.key.toLowerCase()==='m') mark('missed'); if(e.key.toLowerCase()==='c') toggleCall(); if(e.key.toLowerCase()==='d') toggleTheme(); }; window.addEventListener('beforeunload',save); apply(false);
 </script>
 </body>
