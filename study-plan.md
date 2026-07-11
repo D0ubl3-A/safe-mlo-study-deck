@@ -8,11 +8,12 @@ I made you a cleaner study deck from the SAFE MLO materials so we can drill toge
 
 ## What Is Included
 
-- 554 total study items
-- 240 direct flashcards
-- 84 quick-rule cards from tables
-- 42 wrong-answer trap cards
+- 728 total study items
+- 399 direct flashcards
+- 79 quick-rule cards
+- 59 wrong-answer trap cards
 - 188 multiple-choice practice questions
+- 3 missed-question study steps
 
 ## Best Study Flow
 
