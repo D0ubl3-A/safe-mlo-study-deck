@@ -1,141 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#090b12" />
-  <meta name="description" content="Shayla Lucky: Keys to the City — a replayable real-estate career game." />
-  <title>Shayla Lucky: Keys to the City</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0a0d12" />
+<title>Shayla Lucky: Keys to the City — 3D</title>
+<style>
+:root{--gold:#e3bb64;--gold2:#ffe3a0;--ink:#f9f6ef;--panel:#091019dd;--line:#ffffff2a;--green:#75e7b4}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b1118;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}#stage{position:fixed;inset:0}#stage canvas{display:block;width:100%;height:100%}.vignette{position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,#0007 0,#0000 22%,#0000 70%,#0009 100%),radial-gradient(circle at center,#0000 55%,#0007 100%)}.brand{position:fixed;top:20px;left:24px;display:flex;gap:12px;align-items:center;background:#07101bd9;border:1px solid var(--line);border-radius:18px;padding:11px 15px;backdrop-filter:blur(15px);box-shadow:0 12px 40px #0008}.crest{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--gold);color:var(--gold2);font:900 20px Georgia}.brand b{font:800 24px Georgia;color:var(--gold2);letter-spacing:.04em}.brand small{display:block;color:#c8d0db;font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-top:2px}.topHud{position:fixed;top:20px;right:22px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:55vw}.pill{background:#07101bd9;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:12px;backdrop-filter:blur(14px)}.pill b{color:var(--gold2)}.pill.hot b{color:var(--green)}.mission{position:fixed;left:24px;top:96px;width:min(390px,calc(100vw - 48px));background:#07101be6;border:1px solid var(--line);border-radius:18px;padding:14px 15px;backdrop-filter:blur(15px);box-shadow:0 15px 40px #0007}.eyebrow{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--gold2);font-weight:800}.mission h2{font-size:17px;margin:5px 0}.mission p{font-size:12px;line-height:1.45;color:#d1d7df;margin:0}.progress{height:6px;background:#ffffff14;border-radius:99px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c79535,var(--gold2));transition:.3s}.hint{position:fixed;left:50%;bottom:94px;transform:translateX(-50%);padding:11px 16px;border:1px solid #e3bb6466;border-radius:12px;background:#081018e8;color:#fff;font-weight:800;opacity:0;transition:.2s;pointer-events:none}.controls{position:fixed;right:22px;bottom:22px;background:#07101bdc;border:1px solid var(--line);border-radius:14px;padding:10px 12px;color:#cbd4df;font-size:11px;backdrop-filter:blur(12px)}.controls b{color:#fff}.coords{color:var(--gold2)}.reset{margin-left:10px;border:1px solid #ffffff2a;background:#ffffff0d;color:#fff;border-radius:8px;padding:5px 8px}.stick{display:none;position:fixed;left:24px;bottom:28px;width:116px;height:116px;border-radius:50%;background:#07101b8c;border:1px solid #ffffff2d;touch-action:none}.stickKnob{position:absolute;left:50%;top:50%;margin:-24px;width:48px;height:48px;border-radius:50%;background:#e3bb64a8;border:2px solid #ffe3a0;box-shadow:0 4px 18px #0008;pointer-events:none}.interactBtn{display:none;position:fixed;right:26px;bottom:34px;width:82px;height:82px;border-radius:50%;border:2px solid var(--gold);background:#091019de;color:#fff;font-weight:900}.modal{display:none;position:fixed;inset:0;background:#02060ac9;align-items:center;justify-content:center;padding:20px;z-index:10;backdrop-filter:blur(8px)}.modal.open{display:flex}.dialog{width:min(560px,100%);background:linear-gradient(180deg,#172131,#0b111b);border:1px solid #ffffff2d;border-radius:24px;padding:22px;box-shadow:0 30px 90px #000}.dialog h2{margin:5px 0 8px}.dialog p{color:#cbd3dd;line-height:1.5}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.actions button{border-radius:12px;padding:11px 14px;font-weight:850}.primary{border:0;background:linear-gradient(135deg,var(--gold2),#b67c24);color:#171009}.secondary{border:1px solid #ffffff24;background:#ffffff0d;color:#fff}.toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-15px);opacity:0;background:#0a111ce8;border:1px solid #ffffff2d;border-radius:999px;padding:11px 16px;font-size:12px;transition:.25s;pointer-events:none;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.brand{left:10px;top:10px;padding:8px 10px}.crest{width:36px;height:36px}.brand b{font-size:17px}.brand small{display:none}.topHud{top:10px;right:8px;max-width:58vw;gap:5px}.pill{font-size:9px;padding:6px 8px}.mission{left:10px;top:66px;width:calc(100vw - 20px);padding:11px}.mission h2{font-size:14px}.mission p{font-size:11px}.controls{display:none}.stick,.interactBtn{display:block}.hint{bottom:126px;font-size:11px}.toast{top:66px}}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <main class="gameWrap">
-      <canvas id="game" aria-label="Shayla Lucky Keys to the City game world"></canvas>
-      <div class="shade"></div>
-
-      <div class="brand">
-        <div class="brandMark">SL</div>
-        <div><b>Shayla Lucky</b><small>Keys to the City · Career Mode 2.0</small></div>
-      </div>
-
-      <div class="hud">
-        <div class="pill">Level <b id="hudLevel">1</b></div>
-        <div class="pill">Reputation <b id="hudRep">120</b></div>
-        <div class="pill">Commission <b id="hudMoney">$0</b></div>
-        <div class="pill hot">Momentum <b id="hudMomentum">1×</b></div>
-      </div>
-
-      <section class="missionCard">
-        <div class="missionTop">
-          <div class="eyebrow">Current Career Objective</div>
-          <div class="rewardPreview" id="rewardPreview">Up to 90 REP · $5.2K</div>
-        </div>
-        <h2 id="missionTitle">Earn the first set of keys</h2>
-        <p id="missionText">Meet the Carters and prove you understand their needs before the house.</p>
-        <div class="progress"><i id="missionProgress"></i></div>
-        <div class="subgoal"><span id="nextUnlock">Next rank loading…</span><span>Strong decisions build Momentum</span></div>
-      </section>
-
-      <div class="mobilePad">
-        <div class="dpad">
-          <button class="up" data-key="ArrowUp">▲</button>
-          <button class="down" data-key="ArrowDown">▼</button>
-          <button class="left" data-key="ArrowLeft">◀</button>
-          <button class="right" data-key="ArrowRight">▶</button>
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="controlBtn" id="helpBtn">Controls</button>
-        <button class="controlBtn" id="actionBtn">Inspect Property</button>
-      </div>
-    </main>
-
-    <aside class="side">
-      <section class="panel">
-        <div class="profile">
-          <div class="avatar">S</div>
-          <div>
-            <div class="eyebrow">Brand Hero</div>
-            <h1>Shayla Lucky</h1>
-            <p><span class="rank" id="rankName">Rising Agent</span> · Client-first market expert</p>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat"><b id="statDeals">0</b><span>Deals</span></div>
-          <div class="stat"><b id="statHomes">0</b><span>Homes seen</span></div>
-          <div class="stat"><b id="statStreak">1</b><span>Day streak</span></div>
-          <div class="stat"><b id="statSkills">0</b><span>Skill pts</span></div>
-        </div>
-        <div class="xpWrap">
-          <div class="xpMeta"><span>Next skill point</span><span id="xpText">0 / 100 XP</span></div>
-          <div class="progress"><i id="xpFill"></i></div>
-        </div>
-      </section>
-
-      <section class="panel momentum">
-        <div class="momentumLine">
-          <div>
-            <div class="eyebrow">Deal Momentum</div>
-            <div class="muted" id="momentumBonus">Perfect-choice reward multiplier: 1.00×</div>
-          </div>
-          <div class="combo" id="momentumValue">1×</div>
-        </div>
-        <div id="leadHost"><p class="muted tiny">Referral meter 0/5</p></div>
-      </section>
-
-      <section class="panel">
-        <div class="tabs">
-          <button class="tab active" data-tab="missions">Career</button>
-          <button class="tab" data-tab="listings">Homes</button>
-          <button class="tab" data-tab="rankings">Rank</button>
-          <button class="tab" data-tab="skills">Skills</button>
-          <button class="tab" data-tab="achievements">Badges</button>
-        </div>
-        <div class="screen active" id="missions"></div>
-        <div class="screen" id="listings"></div>
-        <div class="screen" id="rankings"></div>
-        <div class="screen" id="skills"></div>
-        <div class="screen" id="achievements"></div>
-      </section>
-
-      <section class="panel challenge">
-        <div class="eyebrow">Daily Market Challenge</div>
-        <h3>Guess the Price</h3>
-        <p class="muted noMargin">Modern 3BR · 2BA · pool · renovated kitchen</p>
-        <strong id="guessResult">?</strong>
-        <div class="choiceGrid">
-          <button class="choice" data-guess="439000">$439K</button>
-          <button class="choice" data-guess="459000">$459K</button>
-          <button class="choice" data-guess="475000">$475K</button>
-          <button class="choice" data-guess="489000">$489K</button>
-          <button class="choice" data-guess="505000">$505K</button>
-        </div>
-      </section>
-
-      <div class="note">
-        All homes, prices, clients, commissions, rankings, market conditions and rewards are simulated gameplay data.
-        Daily streaks are bonus-only; missing a day never removes currency, items or progress.
-      </div>
-    </aside>
-  </div>
-
-  <div class="modalBack" id="modalBack">
-    <div class="modal">
-      <button class="close" id="closeModal" aria-label="Close">×</button>
-      <div class="eyebrow" id="modalEyebrow">Property Opportunity</div>
-      <h2 id="modalTitle"></h2>
-      <p id="modalBody"></p>
-      <div id="modalDetails"></div>
-      <div class="row" id="modalActions"></div>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
-  <script src="game-part1.js" defer></script>
-  <script src="game-part2.js" defer></script>
-  <script src="game-part3.js" defer></script>
-  <script src="game-part4.js" defer></script>
-</body>
-</html>
+<div id="stage"></div><div class="vignette"></div>
+<div class="brand"><div class="crest">SL</div><div><b>Shayla Lucky</b><small>Keys to the City · 3D Career Mode</small></div></div>
+<div class="topHud"><div class="pill">LVL <b id="level">1</b></div><div class="pill">REPUTATION <b id="rep">120</b></div><div class="pill">COMMISSION <b id="cash">$0</b></div><div class="pill hot">MOMENTUM <b id="momentum">1×</b></div></div>
+<section class="mission"><div class="eyebrow">Main Mission</div><h2 id="missionTitle">Meet the client at the open house</h2><p id="missionText">Walk to Sunset Courtyard and inspect the property.</p><div class="progress"><i id="missionProgress"></i></div></section>
+<div class="hint" id="hint">E · Inspect Property</div>
+<div class="controls"><b>WASD</b> move · <b>Shift</b> sprint · <b>drag</b> camera · <b>wheel</b> zoom · <b>E</b> interact · position <span class="coords" id="coords">0, 34</span><button class="reset" id="resetBtn">Reset</button></div>
+<div class="stick" id="stick"><div class="stickKnob" id="stickKnob"></div></div><button class="interactBtn" id="interactBtn">INTERACT</button>
+<div class="modal" id="modal"><div class="dialog"><div class="eyebrow">Property Decision</div><h2 id="modalTitle">Property</h2><p id="modalText"></p><div class="actions"><button class="primary" id="modalGood">Client-first decision</button><button class="secondary" id="modalClose">Keep exploring</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script type="module" src="three-game.js"></script>
+</body></html>
