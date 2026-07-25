@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#090b12" />
+  <meta name="description" content="Shayla Lucky: Keys to the City — a replayable real-estate career game." />
+  <title>Shayla Lucky: Keys to the City</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <main class="gameWrap">
+      <canvas id="game" aria-label="Shayla Lucky Keys to the City game world"></canvas>
+      <div class="shade"></div>
+
+      <div class="brand">
+        <div class="brandMark">SL</div>
+        <div><b>Shayla Lucky</b><small>Keys to the City · Career Mode 2.0</small></div>
+      </div>
+
+      <div class="hud">
+        <div class="pill">Level <b id="hudLevel">1</b></div>
+        <div class="pill">Reputation <b id="hudRep">120</b></div>
+        <div class="pill">Commission <b id="hudMoney">$0</b></div>
+        <div class="pill hot">Momentum <b id="hudMomentum">1×</b></div>
+      </div>
+
+      <section class="missionCard">
+        <div class="missionTop">
+          <div class="eyebrow">Current Career Objective</div>
+          <div class="rewardPreview" id="rewardPreview">Up to 90 REP · $5.2K</div>
+        </div>
+        <h2 id="missionTitle">Earn the first set of keys</h2>
+        <p id="missionText">Meet the Carters and prove you understand their needs before the house.</p>
+        <div class="progress"><i id="missionProgress"></i></div>
+        <div class="subgoal"><span id="nextUnlock">Next rank loading…</span><span>Strong decisions build Momentum</span></div>
+      </section>
+
+      <div class="mobilePad">
+        <div class="dpad">
+          <button class="up" data-key="ArrowUp">▲</button>
+          <button class="down" data-key="ArrowDown">▼</button>
+          <button class="left" data-key="ArrowLeft">◀</button>
+          <button class="right" data-key="ArrowRight">▶</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="controlBtn" id="helpBtn">Controls</button>
+        <button class="controlBtn" id="actionBtn">Inspect Property</button>
+      </div>
+    </main>
+
+    <aside class="side">
+      <section class="panel">
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div>
+            <div class="eyebrow">Brand Hero</div>
+            <h1>Shayla Lucky</h1>
+            <p><span class="rank" id="rankName">Rising Agent</span> · Client-first market expert</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="statDeals">0</b><span>Deals</span></div>
+          <div class="stat"><b id="statHomes">0</b><span>Homes seen</span></div>
+          <div class="stat"><b id="statStreak">1</b><span>Day streak</span></div>
+          <div class="stat"><b id="statSkills">0</b><span>Skill pts</span></div>
+        </div>
+        <div class="xpWrap">
+          <div class="xpMeta"><span>Next skill point</span><span id="xpText">0 / 100 XP</span></div>
+          <div class="progress"><i id="xpFill"></i></div>
+        </div>
+      </section>
+
+      <section class="panel momentum">
+        <div class="momentumLine">
+          <div>
+            <div class="eyebrow">Deal Momentum</div>
+            <div class="muted" id="momentumBonus">Perfect-choice reward multiplier: 1.00×</div>
+          </div>
+          <div class="combo" id="momentumValue">1×</div>
+        </div>
+        <div id="leadHost"><p class="muted tiny">Referral meter 0/5</p></div>
+      </section>
+
+      <section class="panel">
+        <div class="tabs">
+          <button class="tab active" data-tab="missions">Career</button>
+          <button class="tab" data-tab="listings">Homes</button>
+          <button class="tab" data-tab="rankings">Rank</button>
+          <button class="tab" data-tab="skills">Skills</button>
+          <button class="tab" data-tab="achievements">Badges</button>
+        </div>
+        <div class="screen active" id="missions"></div>
+        <div class="screen" id="listings"></div>
+        <div class="screen" id="rankings"></div>
+        <div class="screen" id="skills"></div>
+        <div class="screen" id="achievements"></div>
+      </section>
+
+      <section class="panel challenge">
+        <div class="eyebrow">Daily Market Challenge</div>
+        <h3>Guess the Price</h3>
+        <p class="muted noMargin">Modern 3BR · 2BA · pool · renovated kitchen</p>
+        <strong id="guessResult">?</strong>
+        <div class="choiceGrid">
+          <button class="choice" data-guess="439000">$439K</button>
+          <button class="choice" data-guess="459000">$459K</button>
+          <button class="choice" data-guess="475000">$475K</button>
+          <button class="choice" data-guess="489000">$489K</button>
+          <button class="choice" data-guess="505000">$505K</button>
+        </div>
+      </section>
+
+      <div class="note">
+        All homes, prices, clients, commissions, rankings, market conditions and rewards are simulated gameplay data.
+        Daily streaks are bonus-only; missing a day never removes currency, items or progress.
+      </div>
+    </aside>
+  </div>
+
+  <div class="modalBack" id="modalBack">
+    <div class="modal">
+      <button class="close" id="closeModal" aria-label="Close">×</button>
+      <div class="eyebrow" id="modalEyebrow">Property Opportunity</div>
+      <h2 id="modalTitle"></h2>
+      <p id="modalBody"></p>
+      <div id="modalDetails"></div>
+      <div class="row" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="game-part1.js" defer></script>
+  <script src="game-part2.js" defer></script>
+  <script src="game-part3.js" defer></script>
+  <script src="game-part4.js" defer></script>
+</body>
+</html>
